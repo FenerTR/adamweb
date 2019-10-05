@@ -1,0 +1,16 @@
+---
+- hosts: centosserver
+  become: yes
+  become_method: sudo
+  become_user: dmuser
+  tasks:
+    - name: Pinging the remote server
+      ping:
+    - name: List the directory
+      command: ls -latr
+    - name: Check hostname
+      sudo: yes
+      shell: hostname
+      register: hostname_name
+    - debug:
+        msg: "The hostname is {{hostname_name}}"
